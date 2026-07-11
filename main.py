@@ -15,7 +15,8 @@ def main():
         
         soup = parse_html(response.text)
         
-        print(type(soup))
+        with open("Data/raw/books.html" , 'w' , encoding="utf-8") as f:
+            f.write(response.text)
         
     except Exception as e:
         print(f"Scraper Failed : {e}")
