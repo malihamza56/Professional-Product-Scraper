@@ -6,7 +6,6 @@ from scraper import fetch_html
 from parser import parse_html,extract_products,extract_books_data
 from cleaner import clean_extracted_data
 from exporter import raw_json,processed_json,processed_csv,processed_excel
-import time
 
 
 def main():
