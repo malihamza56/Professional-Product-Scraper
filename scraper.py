@@ -30,6 +30,7 @@ def fetch_html(
             headers=headers,
             timeout=timeout
         )
+        response.encoding = "utf-8"
         
         response.raise_for_status()
         logger.info("HTML Fetched successfully....")
