@@ -4,6 +4,11 @@ BASE_URL = "https://books.toscrape.com/"
 #TIMEOUT
 TIMEOUT = 10
 
+#TIME DELAYS
+
+MIN_DELAY = 1
+MAX_DELAY = 3
+
 #HEADERS
 HEADERS = {
     "User-Agent" : (

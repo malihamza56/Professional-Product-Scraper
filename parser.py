@@ -188,7 +188,36 @@ def extract_image_links(product):
         logger.error(f"Image Extraction Failed | {e}")
         raise
 
+def extract_next_page(soup):
+    
+    """_RETURNS NEXT PAGE URL FOR PAGINATION TO 
+    EXTRACT ALL PRODUCTS THROUGH PAGINATION _
 
+    Args:
+        soup (_OBJECT_): _A PARSED HTML SOUP OF WHOLE WEB PAGE_
+    """
+    logger.info("Next Page Url extraction started...")
+    
+    try:
+        
+        url_tag = soup.select_one("li.next")
+        
+        if url_tag:
+            
+            logger.info("Next Page Url Extracted !")
+            link_tag = url_tag.select_one('a[href]')
+            
+            return link_tag.get("href")
+        
+        else:
+            logger.info("No Next Page !")
+            return None
+        
+    except Exception as e:
+        logger.error(f"Next Page Extraction Stopped | {e}")
+        raise
+    
+    
 def extract_books_data(products):
     
     """_ALL PRODUCTS DATA EXCTRATION_
