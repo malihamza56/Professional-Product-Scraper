@@ -4,7 +4,7 @@ _PARSED HTML AND SCRAP THE PRODUCTS DATA_
 
 from logger import logger
 from bs4 import BeautifulSoup
-
+from urllib.parse import urljoin
 
 def parse_html(html : str):
     
@@ -145,7 +145,7 @@ def availabilty_status(product):
         raise
    
 
-def extract_product_links(product):
+def extract_product_links(product , page_url):
     
     """_LINK EXCTRACTION OF PRODUCT_
 
@@ -156,16 +156,16 @@ def extract_product_links(product):
     logger.info("Product Link Exctracting...")
     
     try:
-        link_tag = product.select_one("a[href]")
+        link_tag = product.select_one("h3 a")
         
         logger.info("Product Link Extracted")
         
-        return link_tag.get("href")
+        return urljoin(page_url,link_tag.get('href'))
 
     except Exception as e:
         logger.error(f"Link Extraction Failed | {e}")
         raise
-   
+    
 
 def extract_image_links(product):
     
@@ -218,7 +218,7 @@ def extract_next_page(soup):
         raise
     
     
-def extract_books_data(products):
+def extract_books_data(products , page_url):
     
     """_ALL PRODUCTS DATA EXCTRATION_
 
@@ -239,7 +239,7 @@ def extract_books_data(products):
             data['Price'] = extract_price(product)
             data['Rating'] = extract_rating(product)
             data['Availability Status'] = availabilty_status(product)
-            data['Links'] = extract_product_links(product)
+            data['Links'] = extract_product_links(product,page_url)
             data['Images'] = extract_image_links(product)
             
             data_list.append(data)

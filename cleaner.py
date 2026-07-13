@@ -88,7 +88,7 @@ def clean_book_link(product):
     try:
         logger.info("product Url cleaned successfully")
     
-        return BASE_URL+product_url
+        return product["Links"]
     
     except Exception as e:
         

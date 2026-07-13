@@ -52,7 +52,7 @@ def processed_json(processed_data):
         
         df = pd.DataFrame(processed_data)
         
-        df.to_json("Data/processed/books.json" , orient="records" , index=False , force_ascii=False , indent=4)
+        df.to_json("Data/processed/books.json" , orient="records" , force_ascii=False , indent=4)
         
         logger.info("Processed Data moved to json successfuly")
     

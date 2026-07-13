@@ -77,6 +77,7 @@ def fetch_all_pages(
         all_books = []
         current_url = url
         count = 0
+        
         while current_url:
             
             logger.info(f"Fetching Page : {current_url}")
@@ -86,13 +87,18 @@ def fetch_all_pages(
             
             products = extract_products(soup=soup)
             
-            books = extract_books_data(products=products)
+            books = extract_books_data(products=products , page_url=response.url)
             
             all_books.extend(books)
             
+            logger.info(f"Current URL :{current_url}" )
+            
             print("Current URL :", current_url)
             next_page = extract_next_page(soup=soup)
-            print("Next Page :", next_page)
+            
+            logger.info(f"Next Page :{next_page}" )
+            print(f"Next Page :{next_page}")
+            
             
             if next_page:
                 current_url = urljoin(response.url,next_page)
